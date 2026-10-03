@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Prescriptions - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .prescription-intro {
+            text-align: center;
+        }
+
+        .prescription-form {
+            max-width: 700px;
+        }
+
+        .form-note {
+            background: #eef7ff;
+            border-left: 4px solid #0f4c81;
+            padding: 14px;
+            margin-bottom: 20px;
+            color: #374151;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .prescription-form button {
+            margin-top: 25px;
+        }
+
+        /* FLASH MESSAGES */
+
+        .flash-message {
+            max-width: 1150px;
+            margin: 25px auto;
+            padding: 14px 18px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .flash-message.success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .flash-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-content">
+
+        <h1>
+            🏥 Hospital Management System
+        </h1>
+
+        <nav>
+
+            <a href="/doctor_dashboard">
+                Dashboard
+            </a>
+
+            <a href="/doctor_appointments">
+                Appointments
+            </a>
+
+            <a href="/doctor_prescriptions">
+                Prescriptions
+            </a>
+
+            <a href="/doctor_profile">
+                Profile
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- FLASH MESSAGES -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        {% for category, message in messages %}
+
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
+
+
+<section class="dashboard">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="welcome-section prescription-intro">
+
+        <h2>
+            💊 Manage Prescriptions
+        </h2>
+
+        <p>
+            Create and provide prescriptions for your patients.
+        </p>
+
+    </div>
+
+
+    <!-- PRESCRIPTION FORM -->
+
+    <div class="form-container prescription-form">
+
+
+        <div class="form-note">
+
+            🩺 Select a patient and enter the prescribed
+            medicine, dosage and instructions carefully.
+
+        </div>
+
+
+        <form method="POST"
+              action="/doctor_prescriptions">
+
+
+            <!-- PATIENT -->
+
+            <label for="patient">
+                Select Patient
+            </label>
+
+            <select
+                name="patient_id"
+                id="patient"
+                required
+            >
+
+                <option value="">
+                    -- Select Patient --
+                </option>
+
+                {% for patient in patients %}
+
+                    <option value="{{ patient[0] }}">
+                        {{ patient[1] }} - {{ patient[2] }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <!-- MEDICINE -->
+
+            <label for="medicine">
+                Medicine
+            </label>
+
+            <input
+                type="text"
+                name="medicine"
+                id="medicine"
+                placeholder="Enter medicine name"
+                required
+            >
+
+
+            <!-- DOSAGE -->
+
+            <label for="dosage">
+                Dosage
+            </label>
+
+            <input
+                type="text"
+                name="dosage"
+                id="dosage"
+                placeholder="Example: 500 mg"
+                required
+            >
+
+
+            <!-- INSTRUCTIONS -->
+
+            <label for="instructions">
+                Instructions
+            </label>
+
+            <textarea
+                name="instructions"
+                id="instructions"
+                rows="5"
+                placeholder="Example: Take after food twice a day"
+                required
+            ></textarea>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit">
+                💊 Add Prescription
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Hospital Management System
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

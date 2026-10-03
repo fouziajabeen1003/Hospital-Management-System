@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        /* =====================================================
+           HOME PAGE
+           ===================================================== */
+
+        .home-hero {
+            background: linear-gradient(
+                135deg,
+                #0f4c81,
+                #1769aa
+            );
+
+            color: white;
+            padding: 80px 25px;
+            text-align: center;
+        }
+
+
+        .home-hero h2 {
+            font-size: 42px;
+            margin-bottom: 18px;
+        }
+
+
+        .home-hero p {
+            font-size: 19px;
+            margin-bottom: 30px;
+            color: #e5f2ff;
+        }
+
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+
+        .hero-buttons a {
+            text-decoration: none;
+        }
+
+
+        .hero-primary {
+            background: white;
+            color: #0f4c81;
+        }
+
+
+        .hero-primary:hover {
+            background: #e5f2ff;
+            color: #0b3a63;
+        }
+
+
+        .hero-secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+
+        .hero-secondary:hover {
+            background: white;
+            color: #0f4c81;
+        }
+
+
+        /* =====================================================
+           HOME SERVICES
+           ===================================================== */
+
+        .home-services {
+            max-width: 1200px;
+            margin: 55px auto;
+            padding: 0 25px;
+        }
+
+
+        .home-section-heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+
+        .home-section-heading h2 {
+            color: #0f4c81;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+
+        .home-section-heading p {
+            color: #6b7280;
+        }
+
+
+        .home-service-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+
+        .home-service-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+            transition: 0.3s ease;
+        }
+
+
+        .home-service-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+
+        .home-service-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+
+        .home-service-card h3 {
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+
+        .home-service-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           WHY CHOOSE US
+           ===================================================== */
+
+        .why-us {
+            background: white;
+            padding: 55px 25px;
+            margin-top: 30px;
+        }
+
+
+        .why-us-container {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+
+        .why-us-container h2 {
+            color: #0f4c81;
+            margin-bottom: 30px;
+        }
+
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+
+        .why-us-item {
+            padding: 20px;
+        }
+
+
+        .why-us-item .icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+
+        .why-us-item h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+
+        .why-us-item p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           HOME RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .home-service-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-us-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .home-hero h2 {
+                font-size: 34px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .home-hero {
+                padding: 60px 20px;
+            }
+
+            .home-hero h2 {
+                font-size: 28px;
+            }
+
+            .home-hero p {
+                font-size: 16px;
+            }
+
+            .home-service-container {
+                grid-template-columns: 1fr;
+            }
+
+            .why-us-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+
+<header>
+
+    <div class="header-content">
+
+        <h1>
+            🏥 Hospital Management System
+        </h1>
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/login">
+                Login
+            </a>
+
+            <a href="/register">
+                Register
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HERO SECTION
+     ===================================================== -->
+
+<section class="home-hero">
+
+    <h2>
+        Your Health, Our Priority ❤️
+    </h2>
+
+    <p>
+        Quality healthcare management made simple,
+        convenient and accessible.
+    </p>
+
+
+    <div class="hero-buttons">
+
+        <a href="/login">
+
+            <button class="hero-primary">
+                📅 Book an Appointment
+            </button>
+
+        </a>
+
+
+        <a href="/register">
+
+            <button class="hero-secondary">
+                🚀 Get Started
+            </button>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SERVICES
+     ===================================================== -->
+
+<section class="home-services">
+
+    <div class="home-section-heading">
+
+        <h2>
+            Our Services
+        </h2>
+
+        <p>
+            Everything you need to manage your healthcare in one place.
+        </p>
+
+    </div>
+
+
+    <div class="home-service-container">
+
+
+        <!-- DOCTORS -->
+
+        <div class="home-service-card">
+
+            <div class="home-service-icon">
+                👨‍⚕️
+            </div>
+
+            <h3>
+                Expert Doctors
+            </h3>
+
+            <p>
+                View available doctors, departments and
+                professional experience.
+            </p>
+
+        </div>
+
+
+        <!-- APPOINTMENTS -->
+
+        <div class="home-service-card">
+
+            <div class="home-service-icon">
+                📅
+            </div>
+
+            <h3>
+                Easy Appointments
+            </h3>
+
+            <p>
+                Book and manage your hospital appointments
+                quickly and conveniently.
+            </p>
+
+        </div>
+
+
+        <!-- PRESCRIPTIONS -->
+
+        <div class="home-service-card">
+
+            <div class="home-service-icon">
+                💊
+            </div>
+
+            <h3>
+                Digital Prescriptions
+            </h3>
+
+            <p>
+                Access your medicines, dosage and instructions
+                from your patient dashboard.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     WHY CHOOSE OUR SYSTEM
+     ===================================================== -->
+
+<section class="why-us">
+
+    <div class="why-us-container">
+
+        <h2>
+            Why Use Our Hospital Management System?
+        </h2>
+
+
+        <div class="why-us-grid">
+
+
+            <div class="why-us-item">
+
+                <div class="icon">
+                    🔐
+                </div>
+
+                <h3>
+                    Secure Access
+                </h3>
+
+                <p>
+                    Separate login access for patients and doctors.
+                </p>
+
+            </div>
+
+
+            <div class="why-us-item">
+
+                <div class="icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Easy to Use
+                </h3>
+
+                <p>
+                    Simple and user-friendly interface.
+                </p>
+
+            </div>
+
+
+            <div class="why-us-item">
+
+                <div class="icon">
+                    📊
+                </div>
+
+                <h3>
+                    Easy Management
+                </h3>
+
+                <p>
+                    Manage appointments and prescriptions efficiently.
+                </p>
+
+            </div>
+
+
+            <div class="why-us-item">
+
+                <div class="icon">
+                    💙
+                </div>
+
+                <h3>
+                    Patient Focused
+                </h3>
+
+                <p>
+                    Designed to make healthcare management easier.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer>
+
+    <p>
+        © 2026 Hospital Management System
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

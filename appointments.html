@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Appointments - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .appointment-card {
+            position: relative;
+        }
+
+        .appointment-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .status-pending {
+            background: #fff4cc;
+            color: #856404;
+        }
+
+        .status-approved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-cancelled {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .appointment-details {
+            margin: 8px 0;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .cancel-button {
+            background: #dc3545;
+            margin-top: 15px;
+        }
+
+        .cancel-button:hover {
+            background: #b02a37;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-content">
+
+        <h1>
+            🏥 Hospital Management System
+        </h1>
+
+        <nav>
+
+            <a href="/patient_dashboard">
+                Dashboard
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointment">
+                Book Appointment
+            </a>
+
+            <a href="/prescriptions">
+                Prescriptions
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="dashboard">
+
+
+    <div class="welcome-section">
+
+        <h2>
+            📅 My Appointments
+        </h2>
+
+        <p>
+            View your appointments and track their current status.
+        </p>
+
+    </div>
+
+
+    {% if appointments %}
+
+        <h2 class="section-title">
+            Appointment History
+        </h2>
+
+
+        <div class="dashboard-container">
+
+
+            {% for appointment in appointments %}
+
+
+                <div class="dashboard-card appointment-card">
+
+
+                    <div class="appointment-icon">
+                        📅
+                    </div>
+
+
+                    <h3>
+                        {{ appointment[1] }}
+                    </h3>
+
+
+                    <p class="appointment-details">
+                        <strong>Date:</strong>
+                        {{ appointment[2] }}
+                    </p>
+
+
+                    <p class="appointment-details">
+                        <strong>Time:</strong>
+                        {{ appointment[3] }}
+                    </p>
+
+
+                    <p class="appointment-details">
+                        <strong>Reason:</strong>
+                        {{ appointment[4] }}
+                    </p>
+
+
+                    <p class="appointment-details">
+                        <strong>Status:</strong>
+
+                        {% if appointment[5] == "Pending" %}
+
+                            <span class="status status-pending">
+                                🟡 Pending
+                            </span>
+
+                        {% elif appointment[5] == "Approved" %}
+
+                            <span class="status status-approved">
+                                🟢 Approved
+                            </span>
+
+                        {% elif appointment[5] == "Rejected" %}
+
+                            <span class="status status-rejected">
+                                🔴 Rejected
+                            </span>
+
+                        {% elif appointment[5] == "Completed" %}
+
+                            <span class="status status-completed">
+                                🔵 Completed
+                            </span>
+
+                        {% elif appointment[5] == "Cancelled" %}
+
+                            <span class="status status-cancelled">
+                                ⚫ Cancelled
+                            </span>
+
+                        {% endif %}
+
+                    </p>
+
+
+                    {% if appointment[5] == "Pending" %}
+
+                        <form
+                            method="GET"
+                            action="/cancel_appointment/{{ appointment[0] }}"
+                            onsubmit="return confirm('Are you sure you want to cancel this appointment?');"
+                        >
+
+                            <button
+                                type="submit"
+                                class="cancel-button"
+                            >
+                                Cancel Appointment
+                            </button>
+
+                        </form>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <div class="welcome-section">
+
+            <h3>
+                📅 No Appointments Found
+            </h3>
+
+            <p>
+                You haven't booked any appointments yet.
+            </p>
+
+            <br>
+
+            <a href="/appointment">
+
+                <button>
+                    Book Your First Appointment
+                </button>
+
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Hospital Management System
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

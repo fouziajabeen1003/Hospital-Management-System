@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Hospital Management System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #0f4c81;
+            color: white;
+            padding: 18px 40px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 23px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .login-container {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+        }
+
+        .login-icon {
+            text-align: center;
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .login-card h2 {
+            text-align: center;
+            color: #0f4c81;
+            margin-bottom: 8px;
+        }
+
+        .login-card .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .flash-message {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .flash-message.success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .flash-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            margin-top: 16px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        label:first-of-type {
+            margin-top: 0;
+        }
+
+        input {
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0f4c81;
+            box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.12);
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 13px;
+            background: #0f4c81;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0b3a63;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #0f4c81;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-content">
+
+        <h1>Hospital Management System</h1>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/register">Register</a>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="login-icon">
+            🏥
+        </div>
+
+        <h2>Welcome Back</h2>
+
+        <p class="subtitle">
+            Login to access your account
+        </p>
+
+
+        <!-- FLASH MESSAGES -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- LOGIN FORM -->
+
+        <form method="POST"
+              action="/login">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+            >
+
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <p class="register-link">
+
+            Don't have an account?
+
+            <a href="/register">
+                Create an account
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

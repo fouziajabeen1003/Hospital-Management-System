@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Patient Dashboard - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .patient-hero {
+            background: linear-gradient(
+                135deg,
+                #0f4c81,
+                #1769aa
+            );
+
+            color: white;
+            padding: 35px;
+            border-radius: 18px;
+            margin-bottom: 35px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+        }
+
+        .patient-hero h2 {
+            margin-bottom: 10px;
+        }
+
+        .patient-hero p {
+            color: #e5f2ff;
+        }
+
+        .dashboard-card a {
+            text-decoration: none;
+        }
+
+        .dashboard-card button {
+            margin-top: 15px;
+        }
+
+
+        /* FLASH MESSAGES */
+
+        .flash-message {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 14px 18px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .flash-message.success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .flash-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-content">
+
+        <h1>
+            🏥 Hospital Management System
+        </h1>
+
+        <nav>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/patient_dashboard">
+                Dashboard
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/prescriptions">
+                Prescriptions
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- FLASH MESSAGES -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+        {% for category, message in messages %}
+
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endwith %}
+
+
+<section class="dashboard">
+
+
+    <!-- WELCOME -->
+
+    <div class="patient-hero">
+
+        <h2>
+            Welcome, {{ name }}! 👋
+        </h2>
+
+        <p>
+            Manage your healthcare appointments,
+            doctors and prescriptions from one place.
+        </p>
+
+    </div>
+
+
+    <!-- SERVICES -->
+
+    <h2 class="section-title">
+        Patient Services
+    </h2>
+
+
+    <div class="dashboard-container">
+
+
+        <!-- DOCTORS -->
+
+        <div class="dashboard-card action-card">
+
+            <div class="card-icon">
+                👨‍⚕️
+            </div>
+
+            <h3>
+                Find a Doctor
+            </h3>
+
+            <p>
+                View available doctors,
+                departments and experience.
+            </p>
+
+            <a href="/doctors">
+
+                <button>
+                    View Doctors
+                </button>
+
+            </a>
+
+        </div>
+
+
+        <!-- BOOK APPOINTMENT -->
+
+        <div class="dashboard-card action-card">
+
+            <div class="card-icon">
+                📅
+            </div>
+
+            <h3>
+                Book Appointment
+            </h3>
+
+            <p>
+                Schedule an appointment
+                with your preferred doctor.
+            </p>
+
+            <a href="/appointment">
+
+                <button>
+                    Book Now
+                </button>
+
+            </a>
+
+        </div>
+
+
+        <!-- MY APPOINTMENTS -->
+
+        <div class="dashboard-card action-card">
+
+            <div class="card-icon">
+                📋
+            </div>
+
+            <h3>
+                My Appointments
+            </h3>
+
+            <p>
+                Check your appointments
+                and their current status.
+            </p>
+
+            <a href="/appointments">
+
+                <button>
+                    View Appointments
+                </button>
+
+            </a>
+
+        </div>
+
+
+        <!-- PRESCRIPTIONS -->
+
+        <div class="dashboard-card action-card">
+
+            <div class="card-icon">
+                💊
+            </div>
+
+            <h3>
+                My Prescriptions
+            </h3>
+
+            <p>
+                View medicines, dosage
+                and doctor's instructions.
+            </p>
+
+            <a href="/prescriptions">
+
+                <button>
+                    View Prescriptions
+                </button>
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <div class="welcome-section">
+
+        <h2>
+            Healthcare at Your Fingertips 💙
+        </h2>
+
+        <p>
+            Use your dashboard to book appointments,
+            track appointment status and access
+            digital prescriptions provided by your doctor.
+        </p>
+
+    </div>
+
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Hospital Management System
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

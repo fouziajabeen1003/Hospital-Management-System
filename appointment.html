@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .appointment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .appointment-header h2 {
+            color: #0f4c81;
+            margin-bottom: 10px;
+        }
+
+        .appointment-header p {
+            color: #6b7280;
+        }
+
+        .appointment-form {
+            max-width: 650px;
+        }
+
+        .form-note {
+            background: #eef7ff;
+            border-left: 4px solid #0f4c81;
+            padding: 14px;
+            margin-bottom: 20px;
+            color: #374151;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .time-error {
+            color: #dc2626;
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .appointment-form button {
+            font-size: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-content">
+
+        <h1>
+            🏥 Hospital Management System
+        </h1>
+
+        <nav>
+
+            <a href="/patient_dashboard">
+                Dashboard
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                My Appointments
+            </a>
+
+            <a href="/prescriptions">
+                Prescriptions
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="dashboard">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="welcome-section appointment-header">
+
+        <h2>
+            📅 Book an Appointment
+        </h2>
+
+        <p>
+            Schedule a consultation with one of our doctors.
+        </p>
+
+    </div>
+
+
+    <!-- FORM -->
+
+    <div class="form-container appointment-form">
+
+        <div class="form-note">
+
+            💡 Please select your preferred doctor,
+            appointment date and time, and provide
+            the reason for your visit.
+
+        </div>
+
+
+        <form method="POST"
+              action="/appointment"
+              id="appointmentForm">
+
+
+            <!-- DOCTOR -->
+
+            <label for="doctor">
+                Select Doctor
+            </label>
+
+            <select
+                name="doctor"
+                id="doctor"
+                required
+            >
+
+                <option value="">
+                    -- Select Doctor --
+                </option>
+
+                <option value="Dr. Rahul Sharma">
+                    Dr. Rahul Sharma - Cardiology
+                </option>
+
+                <option value="Dr. Priya Reddy">
+                    Dr. Priya Reddy - Pediatrics
+                </option>
+
+                <option value="Dr. Arjun Kumar">
+                    Dr. Arjun Kumar - General Medicine
+                </option>
+
+            </select>
+
+
+            <!-- DATE -->
+
+            <label for="date">
+                Appointment Date
+            </label>
+
+            <input
+                type="date"
+                name="date"
+                id="date"
+                required
+                min="{{ current_date }}"
+            >
+
+
+            <!-- TIME -->
+
+            <label for="time">
+                Appointment Time
+            </label>
+
+            <input
+                type="time"
+                name="time"
+                id="time"
+                required
+            >
+
+            <div id="timeError"
+                 class="time-error">
+                Please select a future time.
+            </div>
+
+
+            <!-- REASON -->
+
+            <label for="reason">
+                Reason for Visit
+            </label>
+
+            <textarea
+                name="reason"
+                id="reason"
+                rows="5"
+                placeholder="Please describe the reason for your visit..."
+                required
+            ></textarea>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit">
+                📅 Confirm Appointment
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Hospital Management System
+    </p>
+
+</footer>
+
+
+<script>
+
+    const dateInput = document.getElementById("date");
+    const timeInput = document.getElementById("time");
+    const form = document.getElementById("appointmentForm");
+    const timeError = document.getElementById("timeError");
+
+
+    function updateMinimumTime() {
+
+        const selectedDate = dateInput.value;
+
+        const today = new Date();
+
+        const currentYear = today.getFullYear();
+
+        const currentMonth = String(
+            today.getMonth() + 1
+        ).padStart(2, "0");
+
+        const currentDay = String(
+            today.getDate()
+        ).padStart(2, "0");
+
+
+        const todayDate =
+            `${currentYear}-${currentMonth}-${currentDay}`;
+
+
+        if (selectedDate === todayDate) {
+
+            const currentHours = String(
+                today.getHours()
+            ).padStart(2, "0");
+
+            const currentMinutes = String(
+                today.getMinutes()
+            ).padStart(2, "0");
+
+
+            timeInput.min =
+                `${currentHours}:${currentMinutes}`;
+
+        } else {
+
+            timeInput.removeAttribute("min");
+
+        }
+
+    }
+
+
+    dateInput.addEventListener(
+        "change",
+        updateMinimumTime
+    );
+
+
+    timeInput.addEventListener(
+        "change",
+        function () {
+
+            const selectedDate = dateInput.value;
+            const selectedTime = timeInput.value;
+
+            const today = new Date();
+
+            const currentYear = today.getFullYear();
+
+            const currentMonth = String(
+                today.getMonth() + 1
+            ).padStart(2, "0");
+
+            const currentDay = String(
+                today.getDate()
+            ).padStart(2, "0");
+
+
+            const todayDate =
+                `${currentYear}-${currentMonth}-${currentDay}`;
+
+
+            if (
+                selectedDate === todayDate &&
+                selectedTime < timeInput.min
+            ) {
+
+                timeError.style.display = "block";
+
+            } else {
+
+                timeError.style.display = "none";
+
+            }
+
+        }
+    );
+
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            updateMinimumTime();
+
+
+            if (
+                dateInput.value ===
+                new Date().toISOString().split("T")[0]
+            ) {
+
+                if (
+                    timeInput.value &&
+                    timeInput.value < timeInput.min
+                ) {
+
+                    event.preventDefault();
+
+                    timeError.style.display =
+                        "block";
+
+                    return;
+
+                }
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

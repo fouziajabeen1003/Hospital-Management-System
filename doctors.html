@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Our Doctors - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .doctor-card {
+            text-align: center;
+        }
+
+        .doctor-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: #e8f3fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .doctor-card h3 {
+            color: #0f4c81;
+            margin-bottom: 15px;
+        }
+
+        .doctor-info {
+            margin: 10px 0;
+            color: #4b5563;
+        }
+
+        .doctor-department {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: #e8f3fb;
+            color: #0f4c81;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .doctor-card button {
+            margin-top: 18px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-content">
+
+        <h1>
+            🏥 Hospital Management System
+        </h1>
+
+        <nav>
+
+            <a href="/patient_dashboard">
+                Dashboard
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/prescriptions">
+                Prescriptions
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="dashboard">
+
+
+    <!-- PAGE INTRO -->
+
+    <div class="welcome-section">
+
+        <h2>
+            Meet Our Doctors 👨‍⚕️
+        </h2>
+
+        <p>
+            Choose from our experienced healthcare
+            professionals and book an appointment.
+        </p>
+
+    </div>
+
+
+    <!-- DOCTORS -->
+
+    <h2 class="section-title">
+        Available Doctors
+    </h2>
+
+
+    <div class="dashboard-container">
+
+
+        <!-- DR RAHUL -->
+
+        <div class="dashboard-card doctor-card">
+
+            <div class="doctor-icon">
+                👨‍⚕️
+            </div>
+
+            <h3>
+                Dr. Rahul Sharma
+            </h3>
+
+            <span class="doctor-department">
+                Cardiology
+            </span>
+
+            <p class="doctor-info">
+                ❤️ Heart & cardiovascular care
+            </p>
+
+            <p class="doctor-info">
+                <strong>Experience:</strong> 10 Years
+            </p>
+
+            <a href="/appointment">
+
+                <button>
+                    📅 Book Appointment
+                </button>
+
+            </a>
+
+        </div>
+
+
+        <!-- DR PRIYA -->
+
+        <div class="dashboard-card doctor-card">
+
+            <div class="doctor-icon">
+                👩‍⚕️
+            </div>
+
+            <h3>
+                Dr. Priya Reddy
+            </h3>
+
+            <span class="doctor-department">
+                Pediatrics
+            </span>
+
+            <p class="doctor-info">
+                👶 Child healthcare and treatment
+            </p>
+
+            <p class="doctor-info">
+                <strong>Experience:</strong> 8 Years
+            </p>
+
+            <a href="/appointment">
+
+                <button>
+                    📅 Book Appointment
+                </button>
+
+            </a>
+
+        </div>
+
+
+        <!-- DR ARJUN -->
+
+        <div class="dashboard-card doctor-card">
+
+            <div class="doctor-icon">
+                👨‍⚕️
+            </div>
+
+            <h3>
+                Dr. Arjun Kumar
+            </h3>
+
+            <span class="doctor-department">
+                General Medicine
+            </span>
+
+            <p class="doctor-info">
+                🩺 General health and medical care
+            </p>
+
+            <p class="doctor-info">
+                <strong>Experience:</strong> 7 Years
+            </p>
+
+            <a href="/appointment">
+
+                <button>
+                    📅 Book Appointment
+                </button>
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Hospital Management System
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

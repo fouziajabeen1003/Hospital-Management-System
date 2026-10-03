@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Doctor Profile - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .profile-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #e8f3fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 55px;
+        }
+
+        .profile-card h2 {
+            color: #0f4c81;
+            margin-bottom: 8px;
+        }
+
+        .profile-role {
+            display: inline-block;
+            background: #e8f3fb;
+            color: #0f4c81;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .profile-details {
+            border-top: 1px solid #e5e7eb;
+            text-align: left;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .profile-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 15px 5px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .profile-label {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .profile-value {
+            color: #6b7280;
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-card {
+                padding: 25px;
+            }
+
+            .profile-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .profile-value {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-content">
+
+        <h1>
+            🏥 Hospital Management System
+        </h1>
+
+        <nav>
+
+            <a href="/doctor_dashboard">
+                Dashboard
+            </a>
+
+            <a href="/doctor_appointments">
+                Appointments
+            </a>
+
+            <a href="/doctor_prescriptions">
+                Prescriptions
+            </a>
+
+            <a href="/doctor_profile">
+                Profile
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="dashboard">
+
+
+    <div class="welcome-section">
+
+        <h2>
+            👨‍⚕️ Doctor Profile
+        </h2>
+
+        <p>
+            View your professional information and account details.
+        </p>
+
+    </div>
+
+
+    <div class="profile-container">
+
+        <div class="profile-card">
+
+
+            <div class="profile-icon">
+                👨‍⚕️
+            </div>
+
+
+            <h2>
+                {{ doctor["name"] }}
+            </h2>
+
+
+            <span class="profile-role">
+                Medical Doctor
+            </span>
+
+
+            <div class="profile-details">
+
+
+                <div class="profile-row">
+
+                    <span class="profile-label">
+                        📧 Email
+                    </span>
+
+                    <span class="profile-value">
+                        {{ doctor["email"] }}
+                    </span>
+
+                </div>
+
+
+                <div class="profile-row">
+
+                    <span class="profile-label">
+                        👤 Role
+                    </span>
+
+                    <span class="profile-value">
+                        Doctor
+                    </span>
+
+                </div>
+
+
+                <div class="profile-row">
+
+                    <span class="profile-label">
+                        🩺 Department
+                    </span>
+
+                    <span class="profile-value">
+                        {{ doctor["department"] }}
+                    </span>
+
+                </div>
+
+
+                <div class="profile-row">
+
+                    <span class="profile-label">
+                        🏆 Experience
+                    </span>
+
+                    <span class="profile-value">
+                        {{ doctor["experience"] }}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Hospital Management System
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

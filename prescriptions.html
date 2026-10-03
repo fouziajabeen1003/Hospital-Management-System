@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Prescriptions - Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .prescription-card {
+            position: relative;
+        }
+
+        .medicine-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .medicine-name {
+            color: #0f4c81;
+            margin-bottom: 15px;
+        }
+
+        .prescription-detail {
+            margin: 9px 0;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .prescription-note {
+            background: #eef7ff;
+            border-left: 4px solid #0f4c81;
+            padding: 12px;
+            margin-top: 15px;
+            color: #374151;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-content">
+
+        <h1>
+            🏥 Hospital Management System
+        </h1>
+
+        <nav>
+
+            <a href="/patient_dashboard">
+                Dashboard
+            </a>
+
+            <a href="/doctors">
+                Doctors
+            </a>
+
+            <a href="/appointments">
+                Appointments
+            </a>
+
+            <a href="/prescriptions">
+                Prescriptions
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="dashboard">
+
+
+    <!-- PAGE HEADER -->
+
+    <div class="welcome-section">
+
+        <h2>
+            💊 My Prescriptions
+        </h2>
+
+        <p>
+            View medicines and instructions provided by your doctor.
+        </p>
+
+    </div>
+
+
+    {% if prescriptions %}
+
+
+        <h2 class="section-title">
+            Prescription Details
+        </h2>
+
+
+        <div class="dashboard-container">
+
+
+            {% for prescription in prescriptions %}
+
+
+                <div class="dashboard-card prescription-card">
+
+
+                    <div class="medicine-icon">
+                        💊
+                    </div>
+
+
+                    <h3 class="medicine-name">
+                        {{ prescription[1] }}
+                    </h3>
+
+
+                    <p class="prescription-detail">
+
+                        <strong>
+                            Doctor:
+                        </strong>
+
+                        {{ prescription[0] }}
+
+                    </p>
+
+
+                    <p class="prescription-detail">
+
+                        <strong>
+                            Dosage:
+                        </strong>
+
+                        {{ prescription[2] }}
+
+                    </p>
+
+
+                    <div class="prescription-note">
+
+                        <strong>
+                            Instructions:
+                        </strong>
+
+                        {{ prescription[3] }}
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <div class="welcome-section">
+
+            <h3>
+                💊 No Prescriptions Available
+            </h3>
+
+            <p>
+                You don't have any prescriptions yet.
+            </p>
+
+        </div>
+
+
+    {% endif %}
+
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Hospital Management System
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
